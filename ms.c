@@ -18,6 +18,13 @@ void is_ms_init()
 	return;
 }
 
+void is_ms_finalize()
+{
+	free(c);
+
+	return;
+}
+
 _Bool is_ms(MSTYPE ms[X*X])
 {
 	int i, j;
