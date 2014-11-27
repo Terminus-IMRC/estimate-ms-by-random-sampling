@@ -18,7 +18,7 @@ void is_ms_init()
 	return;
 }
 
-_Bool is_ms(MSTYPE *ms)
+_Bool is_ms(MSTYPE ms[X*X])
 {
 	int i, j;
 	_Bool u[X*X]={0};
