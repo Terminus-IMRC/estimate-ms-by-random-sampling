@@ -5,10 +5,10 @@
 #include "X.h"
 
 mpz_t count_right, count_all;
-static mpz_t X2_f;
-static char *X2_f_str;
-static mpf_t X2_f_mpf;
-static int log2_X2_f, log10_X2_f;
+static mpz_t X2_X2;
+static char *X2_X2_str;
+static mpf_t X2_X2_mpf;
+static int log2_X2_X2, log10_X2_X2;
 static mpf_t estimated_ms_count;
 static char *count_right_str, *count_all_str;
 static int count_str_size;
@@ -16,18 +16,18 @@ static mpf_t count_right_mpf, count_all_mpf;
 
 void count_init()
 {
-	mpz_init(X2_f);
-	mpz_fac_ui(X2_f, X*X);
-	X2_f_str=mpz_get_str(NULL, 10, X2_f);
+	mpz_init(X2_X2);
+	mpz_ui_pow_ui(X2_X2, X*X, X*X);
+	X2_X2_str=mpz_get_str(NULL, 10, X2_X2);
 
-	log2_X2_f=mpz_sizeinbase(X2_f, 2);
-	log10_X2_f=mpz_sizeinbase(X2_f, 10);
+	log2_X2_X2=mpz_sizeinbase(X2_X2, 2);
+	log10_X2_X2=mpz_sizeinbase(X2_X2, 10);
 
-	mpf_init2(X2_f_mpf, log2_X2_f+16);
-	mpf_set_str(X2_f_mpf, X2_f_str, 10);
+	mpf_init2(X2_X2_mpf, log2_X2_X2+16);
+	mpf_set_str(X2_X2_mpf, X2_X2_str, 10);
 
-	mpz_init2(count_right, log2_X2_f);
-	mpz_init2(count_all, log2_X2_f);
+	mpz_init2(count_right, log2_X2_X2);
+	mpz_init2(count_all, log2_X2_X2);
 
 	count_str_size=0xffff;
 	count_right_str=(char*)malloc(count_str_size*sizeof(char));
@@ -41,10 +41,10 @@ void count_init()
 		exit(EXIT_FAILURE);
 	}
 
-	mpf_init2(count_right_mpf, log2_X2_f+16);
-	mpf_init2(count_all_mpf, log2_X2_f+16);
+	mpf_init2(count_right_mpf, log2_X2_X2+16);
+	mpf_init2(count_all_mpf, log2_X2_X2+16);
 
-	mpf_init2(estimated_ms_count, log2_X2_f+16);
+	mpf_init2(estimated_ms_count, log2_X2_X2+16);
 
 	return;
 }
@@ -58,7 +58,7 @@ void estimate_ms_count()
 	mpf_set_str(count_all_mpf, count_all_str, 10);
 
 	mpf_div(estimated_ms_count, count_right_mpf, count_all_mpf);
-	mpf_mul(estimated_ms_count, estimated_ms_count, X2_f_mpf);
+	mpf_mul(estimated_ms_count, estimated_ms_count, X2_X2_mpf);
 
 	return;
 }
@@ -70,7 +70,7 @@ char* get_estimated_ms_count_str()
 	mp_exp_t e;
 	int slen;
 
-	s=mpf_get_str(NULL, &e, 10, log10_X2_f, estimated_ms_count);
+	s=mpf_get_str(NULL, &e, 10, log10_X2_X2, estimated_ms_count);
 	s_orig=s;
 	slen=strlen(s);
 
