@@ -49,6 +49,21 @@ void count_init()
 	return;
 }
 
+void count_finalize()
+{
+	mpz_clear(X2_X2);
+	mpz_clear(count_right);
+	mpz_clear(count_all);
+	mpf_clear(X2_X2_mpf);
+	mpf_clear(count_right_mpf);
+	mpf_clear(count_all_mpf);
+	mpf_clear(estimated_ms_count);
+	free(count_right_str);
+	free(count_all_str);
+
+	return;
+}
+
 void estimate_ms_count()
 {
 	count_right_str=mpz_get_str(count_right_str, 10, count_right);

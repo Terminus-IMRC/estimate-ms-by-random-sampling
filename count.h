@@ -6,6 +6,7 @@
 	extern mpz_t count_right, count_all;
 
 	void count_init();
+	void count_finalize();
 	void estimate_ms_count();
 	char* get_estimated_ms_count_str();
 	char* get_incremental_count_str(mpz_t count);
