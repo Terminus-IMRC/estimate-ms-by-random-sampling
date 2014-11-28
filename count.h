@@ -1,16 +1,18 @@
 #ifndef __COUNT_H_INCLUDED__
 #define __COUNT_H_INCLUDED__
 
-#include <gmp.h>
+#include <stdint.h>
+#include <inttypes.h>
 
-	extern mpz_t count_right, count_all;
+	typedef uint64_t COUNTTYPE;
+#define PRICOUNTTYPE PRIu64
+
+	extern COUNTTYPE count_right, count_all;
 
 	void count_init();
 	void count_finalize();
-	void estimate_ms_count();
-	char* get_estimated_ms_count_str();
-	char* get_incremental_count_str(mpz_t count);
+	char* get_incremental_count_str(COUNTTYPE count);
 
-#define count_increment(count) mpz_add_ui(count, count, 1)
+#define count_increment(count) count+=1
 
 #endif /* __COUNT_H_INCLUDED__ */
