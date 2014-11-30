@@ -38,7 +38,7 @@ _Bool is_ms(MSTYPE ms[X*X])
 		u[ms[i]]=!0;
 	}
 
-	memset(c, (uint8_t)0, X+X+2);
+	memset(c, (uint8_t)0, (X+X+2)*sizeof(uint8_t));
 
 	for(i=0; i<X; i++){
 		for(j=0; j<X; j++){
