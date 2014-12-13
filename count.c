@@ -6,18 +6,23 @@
 
 COUNTTYPE count_right, count_all;
 static int max_figures_of_count;
+static _Bool count_init_done=0;
 
 void count_init()
 {
-	count_right=0;
-	count_all=0;
+	if(!count_init_done){
+		count_right=0;
+		count_all=0;
 
-	/* log10(2^(sizeof(COUNTTYPE)*8))
-	   <=> (sizeof(COUNTTYPE)*8)*log10(2)
-		 <=> (sizeof(COUNTTYPE)*8)*(log(2)/log(10)) */
-	max_figures_of_count=ceil((sizeof(COUNTTYPE)*8)*(log(2)/log(10)));
-	/* and in case of negative */
-	max_figures_of_count+=1;
+		/* log10(2^(sizeof(COUNTTYPE)*8))
+			 <=> (sizeof(COUNTTYPE)*8)*log10(2)
+			 <=> (sizeof(COUNTTYPE)*8)*(log(2)/log(10)) */
+		max_figures_of_count=ceil((sizeof(COUNTTYPE)*8)*(log(2)/log(10)));
+		/* and in case of negative */
+		max_figures_of_count+=1;
+
+		count_init_done=!0;
+	}
 
 	return;
 }
