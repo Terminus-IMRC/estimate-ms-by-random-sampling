@@ -6,13 +6,18 @@
 #include "ms.h"
 
 static uint8_t *c;
+static _Bool ms_init_done=0;
 
 void is_ms_init()
 {
-	c=(uint8_t*)malloc((X+X+2)*sizeof(uint8_t));
-	if(c==NULL){
-		fprintf(stderr, "%s:%d: error: failed to allocate c\n", __FILE__, __LINE__);
-		exit(EXIT_FAILURE);
+	if(!ms_init_done){
+		c=(uint8_t*)malloc((X+X+2)*sizeof(uint8_t));
+		if(c==NULL){
+			fprintf(stderr, "%s:%d: error: failed to allocate c\n", __FILE__, __LINE__);
+			exit(EXIT_FAILURE);
+		}
+
+		ms_init_done=!0;
 	}
 
 	return;
