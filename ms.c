@@ -6,7 +6,7 @@
 #include "ms.h"
 
 static uint8_t *c;
-static _Bool ms_init_done=0;
+static _Bool ms_init_done=0, ms_finalize_done=0;
 
 void is_ms_init()
 {
@@ -25,7 +25,11 @@ void is_ms_init()
 
 void is_ms_finalize()
 {
-	free(c);
+	if(!ms_finalize_done){
+		free(c);
+
+		ms_finalize_done=!0;
+	}
 
 	return;
 }
