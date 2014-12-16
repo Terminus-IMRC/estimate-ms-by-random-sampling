@@ -6,7 +6,6 @@
 
 void rand_init()
 {
-
 	srandom(time(NULL));
 
 	return;
